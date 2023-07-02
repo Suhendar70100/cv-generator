@@ -31,3 +31,7 @@ Route.group(() => {
   Route.get('/auth/go/redirect', 'AuthController.goRedirect').as('login.go.redirect')
   Route.get('/auth/go/callback', 'AuthController.goCallback').as('login.go.callback')
 })
+
+Route.group(() => {
+  Route.get('/logout', 'AuthController.logout').as('logout')
+}).middleware('auth')
