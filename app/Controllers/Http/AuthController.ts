@@ -41,4 +41,40 @@ export default class AuthController {
     await auth.use('web').login(user)
     response.redirect('/')
   }
+
+  public async goRedirect({ ally }: HttpContextContract) {
+    return ally.use('google').redirect()
+  }
+
+  public async goCallback({ ally, auth, response, session }: HttpContextContract) {
+    const google = ally.use('google')
+
+    if (google.accessDenied() || google.stateMisMatch()) {
+      session.flash({
+        errors: {
+          login: google.accessDenied() ? 'Access was denied' : 'URL expired',
+        },
+      })
+
+      return response.redirect().toRoute('login')
+    }
+
+    const googleUser = await google.user()
+
+    const user = await User.firstOrCreate(
+      {
+        email: googleUser.email,
+      },
+      {
+        name: googleUser.name,
+        avatarUrl: googleUser.avatarUrl,
+        isVerified: googleUser.emailVerificationState === 'verified',
+        provider: 'google',
+        accessToken: googleUser.token.token,
+      }
+    )
+
+    await auth.use('web').login(user)
+    response.redirect('/')
+  }
 }
