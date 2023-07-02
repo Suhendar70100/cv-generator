@@ -10,8 +10,8 @@
     {{ inspect(flashMessages.all()) }}
     {{ inspect(flashMessages.has('errors.login')) }}
     <br>
-    <a href="{{ route('login.go.redirect') }}">continue with google</a>
+    <a href="/auth/google/redirect">continue with google</a>
     <br>
-    <a href="{{ route('login.gh.redirect') }}">continue with github</a>
+    <a href="/auth/github/redirect">continue with github</a>
 </body>
 </html>

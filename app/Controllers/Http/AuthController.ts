@@ -6,71 +6,35 @@ export default class AuthController {
     return view.render('auth.login')
   }
 
-  public async ghRedirect({ ally }: HttpContextContract) {
-    return ally.use('github').redirect()
+  public async redirect({ ally, params }: HttpContextContract) {
+    return ally.use(params.provider).redirect()
   }
 
-  public async ghCallback({ ally, auth, response, session }: HttpContextContract) {
-    const github = ally.use('github')
+  public async callback({ ally, auth, params, response, session }: HttpContextContract) {
+    const provider = ally.use(params.provider)
 
-    if (github.accessDenied() || github.stateMisMatch()) {
+    if (provider.accessDenied() || provider.stateMisMatch()) {
       session.flash({
         errors: {
-          login: github.accessDenied() ? 'Access was denied' : 'URL expired',
+          login: provider.accessDenied() ? 'Access was denied' : 'URL expired',
         },
       })
 
       return response.redirect().toRoute('login')
     }
 
-    const githubUser = await github.user()
+    const providerUser = await provider.user()
 
     const user = await User.firstOrCreate(
       {
-        email: githubUser.email,
+        email: providerUser.email,
       },
       {
-        name: githubUser.name,
-        avatarUrl: githubUser.avatarUrl,
-        isVerified: githubUser.emailVerificationState === 'verified',
-        provider: 'github',
-        accessToken: githubUser.token.token,
-      }
-    )
-
-    await auth.use('web').login(user)
-    response.redirect('/')
-  }
-
-  public async goRedirect({ ally }: HttpContextContract) {
-    return ally.use('google').redirect()
-  }
-
-  public async goCallback({ ally, auth, response, session }: HttpContextContract) {
-    const google = ally.use('google')
-
-    if (google.accessDenied() || google.stateMisMatch()) {
-      session.flash({
-        errors: {
-          login: google.accessDenied() ? 'Access was denied' : 'URL expired',
-        },
-      })
-
-      return response.redirect().toRoute('login')
-    }
-
-    const googleUser = await google.user()
-
-    const user = await User.firstOrCreate(
-      {
-        email: googleUser.email,
-      },
-      {
-        name: googleUser.name,
-        avatarUrl: googleUser.avatarUrl,
-        isVerified: googleUser.emailVerificationState === 'verified',
-        provider: 'google',
-        accessToken: googleUser.token.token,
+        name: providerUser.name,
+        avatarUrl: providerUser.avatarUrl,
+        isVerified: providerUser.emailVerificationState === 'verified',
+        provider: params.provider,
+        accessToken: providerUser.token.token,
       }
     )
 
