@@ -28,4 +28,6 @@ Route.group(() => {
   Route.get('/login', 'AuthController.login').middleware('guest').as('login')
   Route.get('/auth/gh/redirect', 'AuthController.ghRedirect').as('login.gh.redirect')
   Route.get('/auth/gh/callback', 'AuthController.ghCallback').as('login.gh.callback')
+  Route.get('/auth/go/redirect', 'AuthController.goRedirect').as('login.go.redirect')
+  Route.get('/auth/go/callback', 'AuthController.goCallback').as('login.go.callback')
 })
