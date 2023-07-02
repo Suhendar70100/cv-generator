@@ -9,33 +9,21 @@ export default class AuthController {
     return ally.use('github').redirect()
   }
 
-  public async ghCallback({ ally }: HttpContextContract) {
+  public async ghCallback({ ally, response, session }: HttpContextContract) {
     const github = ally.use('github')
 
-    /**
-     * User has explicitly denied the login request
-     */
-    if (github.accessDenied()) {
-      return 'Access was denied'
+    if (github.accessDenied() || github.stateMisMatch()) {
+      session.flash({
+        errors: {
+          login: github.accessDenied() ? 'Access was denied' : 'URL expired',
+        },
+      })
+
+      return response.redirect().toRoute('login')
     }
 
-    /**
-     * Unable to verify the CSRF state
-     */
-    if (github.stateMisMatch()) {
-      return 'Request expired. Retry again'
-    }
-
-    /**
-     * There was an unknown error during the redirect
-     */
-    if (github.hasError()) {
-      return github.getError()
-    }
-
-    /**
-     * Finally, access the user
-     */
     const user = await github.user()
+
+    return user
   }
 }
