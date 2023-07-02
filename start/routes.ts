@@ -23,3 +23,9 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
+
+Route.group(() => {
+  Route.get('/login', 'AuthController.login').as('login')
+  Route.get('/auth/gh/redirect', 'AuthController.ghRedirect').as('login.gh.redirect')
+  Route.get('/auth/gh/callback', 'AuthController.ghCallback').as('login.gh.callback')
+})
