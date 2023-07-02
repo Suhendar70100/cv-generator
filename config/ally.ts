@@ -27,7 +27,7 @@ const allyConfig: AllyConfig = {
 		driver: 'github',
 		clientId: Env.get('GITHUB_CLIENT_ID'),
 		clientSecret: Env.get('GITHUB_CLIENT_SECRET'),
-		callbackUrl: 'http://127.0.0.1:3333/github/callback',
+		callbackUrl: 'http://127.0.0.1:3333/auth/gh/callback',
 	},
 	/*
 	|--------------------------------------------------------------------------
