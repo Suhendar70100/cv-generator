@@ -42,4 +42,7 @@ export default Env.rules({
   GOOGLE_CLIENT_SECRET: Env.schema.string(),
   GITHUB_CLIENT_ID: Env.schema.string(),
   GITHUB_CLIENT_SECRET: Env.schema.string(),
+
+  UNSPLASH_ACCESS_KEY: Env.schema.string(),
+  UNSPLASH_SECRET_KEY: Env.schema.string(),
 })
