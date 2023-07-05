@@ -32,4 +32,11 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/logout', 'AuthController.logout').as('logout')
+
+  // Route App (Dashboard/Document)
+  Route.get('/app', 'DocumentsController.index').as('document')
+  Route.get('/app/:docId', 'DocumentsController.show').as('document.show')
+  Route.post('/app', 'DocumentsController.store').as('document.store')
+  Route.post('/app/:docId/update', 'DocumentsController.update').as('document.update')
+  Route.post('/app/:docId/destroy', 'DocumentsController.destroy').as('document.destroy')
 }).middleware('auth')
