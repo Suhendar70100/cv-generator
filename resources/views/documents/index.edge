@@ -1,4 +1,6 @@
-{{ inspect(documents) }}
+{{ inspect(session.all()) }}
+{{ inspect(flashMessages.has('errors')) }}
+{{ inspect(flashMessages.get('errors.name')) }}
 
 <head>
   <meta charset="UTF-8">
@@ -7,6 +9,28 @@
   @entryPointStyles('app')
   @entryPointScripts('app')
 </head>
+
+<div class="my-5">
+  <h1>create new</h1>
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Create New</h2>
+      <div>
+        <form action="{{ route('document.store') }}" method="POST">
+          <input name="name" type="text" placeholder="Document Name" class="input input-bordered input-primary w-full max-w-xs" />
+          @if(flashMessages.has('errors.name'))
+            @each(errName in flashMessages.get('errors.name'))
+              <p class="text-error">{{ errName }}</p>
+            @end
+          @end
+          <div class="my-3 card-actions justify-end">
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="flex flex-wrap gap-5">
   @each(doc in documents)
