@@ -1,0 +1,26 @@
+{{ inspect(documents) }}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+
+<div class="flex flex-wrap gap-5">
+  @each(doc in documents)
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <figure class="px-10 pt-10">
+      <img src={{ doc.coverUrl }} alt={{ doc.name }} class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">{{ doc.name }}</h2>
+      <div class="card-actions">
+        <button class="btn btn-success">Edit</button>
+        <button class="btn btn-error">Delete</button>
+      </div>
+    </div>
+  </div>
+  @end
+</div>
