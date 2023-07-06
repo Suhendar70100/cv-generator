@@ -73,3 +73,14 @@
   </div>
   @end
 </div>
+
+<script>
+  function fillFormEdit(id) {
+    const el = document.getElementById(id)
+    const formEditDocument = document.getElementById('formEditDocument')
+    const inputEditDocumentName = document.getElementById('inputEditDocumentName')
+
+    formEditDocument.setAttribute('action', `/app/${id}/update`)
+    inputEditDocumentName.value = el.getAttribute('data-doc-name')
+  }
+</script>
