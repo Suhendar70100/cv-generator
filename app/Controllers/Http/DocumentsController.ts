@@ -45,7 +45,7 @@ export default class DocumentsController {
   public async update({ params, request, response }: HttpContextContract) {
     const id = params.docId
     const { editName } = await request.validate(UpdateDocumentValidator)
-    const document = await Document.find(id)
+    const document = await Document.findOrFail(id)
     const query = await document?.merge({ name: editName }).save()
 
     query ? response.redirect().toRoute('document') : response.redirect().back()
