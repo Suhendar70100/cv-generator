@@ -3,6 +3,7 @@ import ShortUniqueId from 'short-unique-id'
 import axios from 'axios'
 import Document from 'App/Models/Document'
 import CreateDocumentValidator from 'App/Validators/CreateDocumentValidator'
+import UpdateDocumentValidator from 'App/Validators/UpdateDocumentValidator'
 
 export default class DocumentsController {
   public async index({ auth, view }: HttpContextContract) {
@@ -16,7 +17,7 @@ export default class DocumentsController {
      * Generate Cover URL using Unsplash SDK
      * ----------------------------------------------------------------
      * import unsplash from 'Config/unsplash'
-     * 
+     *
      * const { response: res }: any = await unsplash.photos.getRandom({})
      * const coverUrl: string = res.urls.thumb
      */
@@ -37,6 +38,15 @@ export default class DocumentsController {
 
     const payload = { id: uid, userId: auth.user!.id, name, coverUrl }
     const query = await Document.create(payload)
+
+    query ? response.redirect().toRoute('document') : response.redirect().back()
+  }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const id = params.docId
+    const { editName } = await request.validate(UpdateDocumentValidator)
+    const document = await Document.find(id)
+    const query = await document?.merge({ name: editName }).save()
 
     query ? response.redirect().toRoute('document') : response.redirect().back()
   }
