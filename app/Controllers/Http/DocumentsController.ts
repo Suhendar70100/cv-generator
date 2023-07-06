@@ -50,4 +50,10 @@ export default class DocumentsController {
 
     query ? response.redirect().toRoute('document') : response.redirect().back()
   }
+
+  public async destroy({ params, response }: HttpContextContract) {
+    const document = await Document.findOrFail(params.docId)
+    document.delete()
+    return response.redirect().toRoute('document')
+  }
 }
