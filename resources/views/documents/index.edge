@@ -39,7 +39,7 @@
       <h2 class="card-title">Rename Document</h2>
       <div>
         <form id="formEditDocument" action="javascript:;" method="POST">
-          <input id="inputEditDocumentName" name="inputEditDocumentName" type="text" placeholder="Document Name"
+          <input id="inputEditDocumentName" name="editName" type="text" placeholder="Document Name"
             class="input input-bordered input-primary w-full max-w-xs" />
           @if(flashMessages.has('errors.editName'))
           @each(errName in flashMessages.get('errors.editName'))
