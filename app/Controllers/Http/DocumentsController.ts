@@ -12,6 +12,10 @@ export default class DocumentsController {
     return view.render('documents/index', { documents })
   }
 
+  public async show({ params, view }: HttpContextContract) {
+    return view.render('documents/show', { ...params })
+  }
+
   public async store({ auth, request, response }: HttpContextContract) {
     /**
      * Generate Cover URL using Unsplash SDK

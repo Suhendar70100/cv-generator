@@ -60,9 +60,11 @@
 <div class="flex flex-wrap gap-5">
   @each(doc in documents)
   <div class="card w-96 bg-base-100 shadow-xl">
-    <figure class="px-10 pt-10">
-      <img src={{ doc.coverUrl }} alt={{ doc.name }} class="rounded-xl" />
-    </figure>
+    <a href="{{ route('document.show', [doc.id]) }}">
+      <figure class="px-10 pt-10">
+        <img src={{ doc.coverUrl }} alt={{ doc.name }} class="rounded-xl" />
+      </figure>
+    </a>
     <div class="card-body items-center text-center">
       <h2 class="card-title">{{ doc.name }}</h2>
       <div class="card-actions">

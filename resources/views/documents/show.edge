@@ -1,0 +1,51 @@
+{{ inspect(session.all()) }}
+{{ inspect(flashMessages.has('errors')) }}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+
+<div>
+  
+  {{ inspect(params) }}
+
+  <a href="/app/{{ docId }}/header">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Header
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/experiences">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Experiences
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/educations">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Educations
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/projects">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Projects
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/skills">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Skills
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/certifications">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Certifications
+    </div>
+  </a>
+  <a href="/app/{{ docId }}/awards">
+    <div class="p-5 my-3 ms-5 w-5/12 rounded-md bg-emerald-500">
+      Awards
+    </div>
+  </a>
+</div>
