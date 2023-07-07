@@ -10,28 +10,86 @@
 </head>
 
 {{ inspect(params) }}
-{{ inspect(header) }}
+{{ inspect(flashMessages.all()) }}
 
 <form action="{{ route('header.update', [params.docId]) }}" method="POST" class="my-5">
   <input type="hidden" value="{{ header?.id || '' }}" name="id">
+  @if(flashMessages.has('errors.id'))
+  @each(msg in flashMessages.get('errors.id'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
   <input type="hidden" value="{{ params.docId }}" name="docId">
+  @if(flashMessages.has('errors.docId'))
+  @each(msg in flashMessages.get('errors.docId'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.firstName || '' }}" placeholder="First Name" name="firstName">
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.firstName || '' }}"
+    placeholder="First Name" name="firstName">
+  @if(flashMessages.has('errors.firstName'))
+  @each(msg in flashMessages.get('errors.firstName'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.lastName || '' }}" placeholder="Last Name" name="lastName">
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.lastName || '' }}"
+    placeholder="Last Name" name="lastName">
+  @if(flashMessages.has('errors.lastName'))
+  @each(msg in flashMessages.get('errors.lastName'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.city || '' }}" placeholder="City" name="city">
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.city || '' }}" placeholder="City"
+    name="city">
+  @if(flashMessages.has('errors.city'))
+  @each(msg in flashMessages.get('errors.city'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="number" value="{{ header?.zipCode || '' }}" placeholder="Zip Code" name="zipCode">
+  <input class="border border-5 border-primary p-1" type="number" value="{{ header?.zipCode || '' }}"
+    placeholder="Zip Code" name="zipCode">
+  @if(flashMessages.has('errors.zipCode'))
+  @each(msg in flashMessages.get('errors.zipCode'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.phone || '' }}" placeholder="Phone Number" name="phone">
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.phone || '' }}"
+    placeholder="Phone Number" name="phone">
+  @if(flashMessages.has('errors.phone'))
+  @each(msg in flashMessages.get('errors.phone'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="email" value="{{ header?.email || '' }}" placeholder="Email" name="email">
+  <input class="border border-5 border-primary p-1" type="email" value="{{ header?.email || '' }}" placeholder="Email"
+    name="email">
+  @if(flashMessages.has('errors.email'))
+  @each(msg in flashMessages.get('errors.email'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <input class="border border-5 border-primary p-1" type="url" value="{{ header?.linkedIn || '' }}" placeholder="LinkedIn" name="linkedIn">
+  <input class="border border-5 border-primary p-1" type="url" value="{{ header?.linkedIn || '' }}"
+    placeholder="LinkedIn" name="linkedIn">
+  @if(flashMessages.has('errors.linkedIn'))
+  @each(msg in flashMessages.get('errors.linkedIn'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <br>
-  <textarea class="border border-5 border-primary p-1" name="description" id="" cols="30" rows="10">{{ header?.description || '' }}</textarea>
+  <textarea class="border border-5 border-primary p-1" name="description" id="" cols="30"
+    rows="10">{{ header?.description || '' }}</textarea>
   <br>
+  @if(flashMessages.has('errors.description'))
+  @each(msg in flashMessages.get('errors.description'))
+  <p class="text-error">{{ msg }}</p>
+  @end
+  @end
   <input type="submit">
 </form>
