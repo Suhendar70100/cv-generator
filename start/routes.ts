@@ -39,4 +39,8 @@ Route.group(() => {
   Route.post('/app', 'DocumentsController.store').as('document.store')
   Route.post('/app/:docId/update', 'DocumentsController.update').as('document.update')
   Route.post('/app/:docId/destroy', 'DocumentsController.destroy').as('document.destroy')
+
+  // Route Header
+  Route.get('/app/:docId/header', 'HeadersController.index').as('header')
+  Route.post('/app/:docId/header', 'HeadersController.update').as('header.update')
 }).middleware('auth')
