@@ -1,0 +1,37 @@
+{{ inspect(session.all()) }}
+{{ inspect(flashMessages.has('errors')) }}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+
+{{ inspect(params) }}
+{{ inspect(header) }}
+
+<form action="{{ route('header.update', [params.docId]) }}" method="POST" class="my-5">
+  <input type="hidden" value="{{ header?.id || '' }}" name="id">
+  <br>
+  <input type="hidden" value="{{ params.docId }}" name="docId">
+  <br>
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.firstName || '' }}" placeholder="First Name" name="firstName">
+  <br>
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.lastName || '' }}" placeholder="Last Name" name="lastName">
+  <br>
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.city || '' }}" placeholder="City" name="city">
+  <br>
+  <input class="border border-5 border-primary p-1" type="number" value="{{ header?.zipCode || '' }}" placeholder="Zip Code" name="zipCode">
+  <br>
+  <input class="border border-5 border-primary p-1" type="text" value="{{ header?.phone || '' }}" placeholder="Phone Number" name="phone">
+  <br>
+  <input class="border border-5 border-primary p-1" type="email" value="{{ header?.email || '' }}" placeholder="Email" name="email">
+  <br>
+  <input class="border border-5 border-primary p-1" type="url" value="{{ header?.linkedIn || '' }}" placeholder="LinkedIn" name="linkedIn">
+  <br>
+  <textarea class="border border-5 border-primary p-1" name="description" id="" cols="30" rows="10">{{ header?.description || '' }}</textarea>
+  <br>
+  <input type="submit">
+</form>
