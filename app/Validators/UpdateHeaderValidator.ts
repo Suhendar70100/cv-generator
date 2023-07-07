@@ -69,5 +69,16 @@ export default class UpdateHeaderValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'firstName.required': 'First name is required',
+    'lastName.required': 'Last name is required',
+    'zipCode.required': 'Zip code is required',
+    'required': '{{ field }} is required',
+    'alphaNum': 'Only alpha numbers are allowed',
+    'minLength': 'Must be at least {{ options.minLength }} characters',
+    'maxLength': 'Maximal {{ options.minLength }} characters',
+    'mobile': 'Use id-ID phone number, ex: 6282100000000',
+    'email': '{{ field }} is invalid',
+    'url': 'Invalid LinkedIn URL',
+  }
 }
