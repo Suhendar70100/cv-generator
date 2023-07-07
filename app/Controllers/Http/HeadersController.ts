@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Header from 'App/Models/Header'
+import UpdateHeaderValidator from 'App/Validators/UpdateHeaderValidator'
 import ShortUniqueId from 'short-unique-id'
 
 export default class HeadersController {
@@ -10,7 +11,7 @@ export default class HeadersController {
 
   public async update({ request, response }: HttpContextContract) {
     const uid = new ShortUniqueId({ length: 10 })()
-    const body = request.body()
+    const body = await request.validate(UpdateHeaderValidator)
     body.id = body.id || uid
     const header = await Header.updateOrCreate({ docId: body.docId }, { ...body })
     header ? response.redirect().toRoute('header', [body.docId]) : response.redirect().back()

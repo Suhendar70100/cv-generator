@@ -4,7 +4,7 @@ import Document from './Document'
 
 export default class Header extends BaseModel {
   @column({ isPrimary: true })
-  public id: string
+  public id: string | null
 
   @column()
   public docId: string
