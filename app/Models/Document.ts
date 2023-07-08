@@ -11,6 +11,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import User from 'App/Models/User'
 import Header from './Header'
+import Experience from './Experience'
 
 export default class Document extends BaseModel {
   @column({ isPrimary: true })
