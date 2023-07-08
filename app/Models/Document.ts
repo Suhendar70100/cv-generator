@@ -1,5 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  column,
+  belongsTo,
+  BelongsTo,
+  hasOne,
+  HasOne,
+  hasMany,
+  HasMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import User from 'App/Models/User'
 
 export default class Document extends BaseModel {
@@ -22,12 +31,17 @@ export default class Document extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User, {
-    serializeAs: 'user'
+    serializeAs: 'user',
   })
   public user: BelongsTo<typeof User>
 
   @hasOne(() => Header, {
-    serializeAs: 'header'
+    serializeAs: 'header',
   })
   public header: HasOne<typeof Header>
+
+  @hasMany(() => Experience, {
+    serializeAs: 'experiences',
+  })
+  public experiences: HasMany<typeof Experience>
 }
