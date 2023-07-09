@@ -38,11 +38,13 @@ export default class Document extends BaseModel {
   public user: BelongsTo<typeof User>
 
   @hasOne(() => Header, {
+    foreignKey: 'docId',
     serializeAs: 'header',
   })
   public header: HasOne<typeof Header>
 
   @hasMany(() => Experience, {
+    foreignKey: 'docId',
     serializeAs: 'experiences',
   })
   public experiences: HasMany<typeof Experience>
