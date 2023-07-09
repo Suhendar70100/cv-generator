@@ -3,14 +3,18 @@ import Document from 'App/Models/Document'
 
 declare module '@ioc:Adonis/Core/Request' {
   interface RequestContract {
-    document: object
+    document: object | any
   }
 }
 
 export default class DocId {
-  public async handle({ params, request }: HttpContextContract, next: () => Promise<void>) {
+  public async handle({ auth, params, request }: HttpContextContract, next: () => Promise<void>) {
+    await auth.use('web').authenticate()
     const { docId } = params
-    const document = await Document.findOrFail(docId)
+    const document = await Document.query()
+      .where('id', docId)
+      .where('userId', auth.user!.id)
+      .firstOrFail()
     request.document = document
     await next()
   }
