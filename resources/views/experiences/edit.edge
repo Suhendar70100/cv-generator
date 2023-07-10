@@ -1,7 +1,7 @@
 {{ inspect(flashMessages.all()) }}
 {{ inspect(session.all()) }}
 
-{{-- <form action="{{ route('experience.update', [document.id, experience.id]) }}"> --}}
+<form action="{{ route('experience.update', [document.id, experience.id]) }}">
     <input type="text" name="title" id="" value="{{ experience.title }}" placeholder="Title">
     <br>
     <input type="text" name="company" id="" value="{{ experience.company }}" placeholder="Company">
@@ -15,10 +15,10 @@
         <option value="Volunteer" {{ experience.type==='Volunteer' ? 'selected' : '' }}>Volunteer</option>
     </select>
     <br>
-    {{-- <input type="date" name="startDate" id="startDate" value="{{ experience.startDate.toFormat('yyyy-MM-dd') }}"
-        --}} placeholder="Start Date">
+    <input type="date" name="startDate" id="startDate" value="{{ experience.startDate.toFormat('yyyy-MM-dd') }}"
+        placeholder="Start Date">
     <br>
-    {{-- <input type="date" name="endDate" id="endDate" value="{{ experience.endDate?.toFormat('yyyy-MM-dd') }}" --}}
+    <input type="date" name="endDate" id="endDate" value="{{ experience.endDate?.toFormat('yyyy-MM-dd') }}"
         placeholder="End Date">
     <br>
     <input type="checkbox" name="isActive" id="" {{ experience.isActive ? 'checked' : '' }}>
