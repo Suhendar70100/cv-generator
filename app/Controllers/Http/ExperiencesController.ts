@@ -34,4 +34,21 @@ export default class ExperiencesController {
 
     return view.render('experiences/edit', { document, experience })
   }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const document = request.document
+    const experience = await Experience.query()
+      .where('id', params.expId)
+      .where('docId', document.id)
+      .firstOrFail()
+
+    await experience
+      .merge({
+        ...request.body(),
+        isActive: request.input('isActive') ? request.input('isActive') : 0,
+      })
+      .save()
+
+    return response.redirect().toRoute('experience.show', [document.id, experience.id])
+  }
 }
