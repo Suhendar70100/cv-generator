@@ -51,4 +51,15 @@ export default class ExperiencesController {
 
     return response.redirect().toRoute('experience.show', [document.id, experience.id])
   }
+
+  public async destroy({ params, request, response }: HttpContextContract) {
+    const document = request.document
+    const experience = await Experience.query()
+      .where('id', params.expId)
+      .where('docId', document.id)
+      .firstOrFail()
+
+    await experience.delete()
+    return response.redirect().toRoute('experience', [document.id])
+  }
 }
