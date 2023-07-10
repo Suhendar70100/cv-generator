@@ -1,0 +1,29 @@
+{{ inspect(flashMessages.all()) }}
+{{ inspect(session.all()) }}
+
+{{-- <form action="{{ route('experience.update', [document.id, experience.id]) }}"> --}}
+    <input type="text" name="title" id="" value="{{ experience.title }}" placeholder="Title">
+    <br>
+    <input type="text" name="company" id="" value="{{ experience.company }}" placeholder="Company">
+    <br>
+    <select name="type" id="">
+        <option value="Full Time" {{ experience.type==='Full Time' ? 'selected' : '' }}>Full Time</option>
+        <option value="Part Time" {{ experience.type==='Part Time' ? 'selected' : '' }}>Part Time</option>
+        <option value="Freelance" {{ experience.type==='Freelance' ? 'selected' : '' }}>Freelance</option>
+        <option value="Contract" {{ experience.type==='Contract' ? 'selected' : '' }}>Contract</option>
+        <option value="Internship" {{ experience.type==='Internship' ? 'selected' : '' }}>Internship</option>
+        <option value="Volunteer" {{ experience.type==='Volunteer' ? 'selected' : '' }}>Volunteer</option>
+    </select>
+    <br>
+    {{-- <input type="date" name="startDate" id="startDate" value="{{ experience.startDate.toFormat('yyyy-MM-dd') }}"
+        --}} placeholder="Start Date">
+    <br>
+    {{-- <input type="date" name="endDate" id="endDate" value="{{ experience.endDate?.toFormat('yyyy-MM-dd') }}" --}}
+        placeholder="End Date">
+    <br>
+    <input type="checkbox" name="isActive" id="" {{ experience.isActive ? 'checked' : '' }}>
+    <br>
+    <textarea name="description" id="" cols="30" rows="10">{{ experience.description }}</textarea>
+    <br>
+    <input type="submit" value="Update">
+</form>
