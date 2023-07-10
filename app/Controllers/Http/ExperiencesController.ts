@@ -39,6 +39,7 @@ export default class ExperiencesController {
 
   public async update({ params, request, response }: HttpContextContract) {
     const document = request.document
+    const payload = await request.validate(CreateExperienceValidator)
     const experience = await Experience.query()
       .where('id', params.expId)
       .where('docId', document.id)
@@ -46,8 +47,8 @@ export default class ExperiencesController {
 
     await experience
       .merge({
-        ...request.body(),
-        isActive: request.input('isActive') ? request.input('isActive') : 0,
+        ...payload,
+        isActive: payload.isActive ? true : false,
       })
       .save()
 
