@@ -9,6 +9,8 @@
   @entryPointScripts('app')
 </head>
 
+<a href="{{ route('experience.create', [document.id]) }}" class="btn btn-info m-5">Create New Experience</a>
+
 @each(exp in experiences)
 <ul class="menu w-56 rounded-box m-5 bg-primary">
   <li class="text-xl font-bold">{{ exp.title }}</li>

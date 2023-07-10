@@ -1,0 +1,28 @@
+{{ inspect(flashMessages.all()) }}
+{{ inspect(session.all()) }}
+
+<form action="{{ route('experience.store', [document.id]) }}" method="POST">
+    <input type="text" name="title" id="" placeholder="Title">
+    <br>
+    <input type="text" name="company" id="" placeholder="Company">
+    <br>
+    <select name="type" id="">
+        <option value="" selected disabled>Select options</option>
+        <option value="Full Time">Full Time</option>
+        <option value="Part Time">Part Time</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Contract">Contract</option>
+        <option value="Internship">Internship</option>
+        <option value="Volunteer">Volunteer</option>
+    </select>
+    <br>
+    <input type="date" name="startDate" id="startDate" placeholder="Start Date">
+    <br>
+    <input type="date" name="endDate" id="endDate" placeholder="End Date">
+    <br>
+    <input type="checkbox" name="isActive" id="" value="1">
+    <br>
+    <textarea name="description" id="" cols="30" rows="10"></textarea>
+    <br>
+    <input type="submit" value="Create">
+</form>
