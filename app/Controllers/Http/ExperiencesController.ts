@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Experience from 'App/Models/Experience'
 import ShortUniqueId from 'short-unique-id'
+import Experience from 'App/Models/Experience'
+import CreateExperienceValidator from 'App/Validators/CreateExperienceValidator'
 
 export default class ExperiencesController {
   public async index({ request, view }: HttpContextContract) {
@@ -16,9 +17,10 @@ export default class ExperiencesController {
 
   public async store({ request, response }: HttpContextContract) {
     const uid = new ShortUniqueId({ length: 10 })()
+    const payload = await request.validate(CreateExperienceValidator)
     const document = request.document
     await document.related('experiences').create({
-      ...request.body(),
+      ...payload,
       id: uid,
     })
 
