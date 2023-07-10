@@ -41,6 +41,10 @@ Route.group(() => {
   Route.post('/app/:docId/destroy', 'DocumentsController.destroy').as('document.destroy')
 
   // Route Header
-  Route.get('/app/:docId/header', 'HeadersController.index').as('header')
-  Route.post('/app/:docId/header', 'HeadersController.update').as('header.update')
+  Route.group(() => {
+    Route.get('/', 'HeadersController.index').as('header')
+    Route.post('/', 'HeadersController.update').as('header.update')
+  })
+    .prefix('/app/:docId/header')
+    .middleware('validDocId')
 }).middleware('auth')
