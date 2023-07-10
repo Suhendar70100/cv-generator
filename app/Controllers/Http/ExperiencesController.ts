@@ -8,6 +8,11 @@ export default class ExperiencesController {
     return view.render('experiences/index', { document, experiences })
   }
 
+  public async create({ request, view }: HttpContextContract) {
+    const document = request.document
+    return view.render('experiences/create', { document })
+  }
+
   public async show({ params, request, view }: HttpContextContract) {
     const document = request.document
     const experience = await Experience.query()
