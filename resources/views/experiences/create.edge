@@ -1,0 +1,63 @@
+{{ inspect(flashMessages.all()) }}
+{{ inspect(session.all()) }}
+
+<form action="{{ route('experience.store', [document.id]) }}" method="POST">
+  <input type="text" name="title" id="" placeholder="Title">
+  @if(flashMessages.has('errors.title'))
+  @each(msg in flashMessages.get('errors.title'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="text" name="company" id="" placeholder="Company">
+  @if(flashMessages.has('errors.company'))
+  @each(msg in flashMessages.get('errors.company'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <select name="type" id="">
+    <option value="" selected disabled>Select options</option>
+    <option value="Full Time">Full Time</option>
+    <option value="Part Time">Part Time</option>
+    <option value="Freelance">Freelance</option>
+    <option value="Contract">Contract</option>
+    <option value="Internship">Internship</option>
+    <option value="Volunteer">Volunteer</option>
+  </select>
+  @if(flashMessages.has('errors.type'))
+  @each(msg in flashMessages.get('errors.type'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="date" name="startDate" id="startDate" placeholder="Start Date">
+  @if(flashMessages.has('errors.startDate'))
+  @each(msg in flashMessages.get('errors.startDate'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="date" name="endDate" id="endDate" placeholder="End Date">
+  @if(flashMessages.has('errors.endDate'))
+  @each(msg in flashMessages.get('errors.endDate'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="checkbox" name="isActive" id="" value="1">
+  @if(flashMessages.has('errors.isActive'))
+  @each(msg in flashMessages.get('errors.isActive'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <textarea name="description" id="" cols="30" rows="10"></textarea>
+  @if(flashMessages.has('errors.description'))
+  @each(msg in flashMessages.get('errors.description'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="submit" value="Create">
+</form>

@@ -13,6 +13,7 @@ export default class DocumentsController {
   }
 
   public async show({ params, view }: HttpContextContract) {
+    await Document.findOrFail(params.docId)
     return view.render('documents/show', { ...params })
   }
 

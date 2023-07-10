@@ -47,4 +47,16 @@ Route.group(() => {
   })
     .prefix('/app/:docId/header')
     .middleware('validDocId')
+
+  // Route Experience
+  Route.group(() => {
+    Route.get('/', 'ExperiencesController.index').as('experience')
+    Route.get('/new', 'ExperiencesController.create').as('experience.create')
+    Route.get('/:expId', 'ExperiencesController.show').as('experience.show')
+    Route.post('/store', 'ExperiencesController.store').as('experience.store')
+    Route.post('/:expId/update', 'ExperiencesController.update').as('experience.update')
+    Route.post('/:expId/destroy', 'ExperiencesController.destroy').as('experience.destroy')
+  })
+    .prefix('/app/:docId/experiences')
+    .middleware('validDocId')
 }).middleware('auth')
