@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Experience from 'App/Models/Experience'
+import ShortUniqueId from 'short-unique-id'
 
 export default class ExperiencesController {
   public async index({ request, view }: HttpContextContract) {
@@ -11,6 +12,17 @@ export default class ExperiencesController {
   public async create({ request, view }: HttpContextContract) {
     const document = request.document
     return view.render('experiences/create', { document })
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    const uid = new ShortUniqueId({ length: 10 })()
+    const document = request.document
+    await document.related('experiences').create({
+      ...request.body(),
+      id: uid,
+    })
+
+    return response.redirect().toRoute('experience', [document.id])
   }
 
   public async show({ params, request, view }: HttpContextContract) {
