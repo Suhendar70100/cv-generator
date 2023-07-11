@@ -59,4 +59,16 @@ Route.group(() => {
   })
     .prefix('/app/:docId/experiences')
     .middleware('validDocId')
+
+  // Route Education
+  Route.group(() => {
+    Route.get('/', 'EducationsController.index').as('education')
+    Route.get('/new', 'EducationsController.create').as('education.create')
+    Route.get('/:eduId', 'EducationsController.show').as('education.show')
+    Route.post('/store', 'EducationsController.store').as('education.store')
+    Route.post('/:eduId/update', 'EducationsController.update').as('education.update')
+    Route.post('/:eduId/destroy', 'EducationsController.destroy').as('education.destroy')
+  })
+    .prefix('/app/:docId/educations')
+    .middleware('validDocId')
 }).middleware('auth')
