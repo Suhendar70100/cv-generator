@@ -4,7 +4,7 @@ import Document from './Document'
 
 export default class Experience extends BaseModel {
   @column({ isPrimary: true })
-  public id: string | null
+  public id: string
 
   @column()
   public docId: string
