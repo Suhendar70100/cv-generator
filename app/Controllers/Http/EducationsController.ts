@@ -6,4 +6,9 @@ export default class EducationsController {
     const educations = await document.related('educations').query().select('*')
     return view.render('educations/index', { document, educations })
   }
+
+  public async create({ request, view }: HttpContextContract) {
+    const document = request.document
+    return view.render('educations/create', { document })
+  }
 }
