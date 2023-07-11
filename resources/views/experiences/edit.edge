@@ -53,7 +53,7 @@
   @end
   @endif
   <br>
-  <textarea name="description" id="" cols="30" rows="10">{{ experience.description }}</textarea>
+  <textarea name="description" id="" cols="30" rows="10">{{ experience.description ?? '' }}</textarea>
   @if(flashMessages.has('errors.description'))
   @each(msg in flashMessages.get('errors.description'))
   <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
