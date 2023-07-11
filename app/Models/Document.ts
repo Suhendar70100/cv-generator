@@ -12,6 +12,11 @@ import {
 import User from 'App/Models/User'
 import Header from './Header'
 import Experience from './Experience'
+import Education from './Education'
+import Project from './Project'
+import Skill from './Skill'
+import Certification from './Certification'
+import Award from './Award'
 
 export default class Document extends BaseModel {
   @column({ isPrimary: true })
@@ -48,4 +53,34 @@ export default class Document extends BaseModel {
     serializeAs: 'experiences',
   })
   public experiences: HasMany<typeof Experience>
+
+  @hasMany(() => Education, {
+    foreignKey: 'docId',
+    serializeAs: 'educations',
+  })
+  public educations: HasMany<typeof Education>
+
+  @hasMany(() => Project, {
+    foreignKey: 'docId',
+    serializeAs: 'projects',
+  })
+  public projects: HasMany<typeof Project>
+
+  @hasMany(() => Skill, {
+    foreignKey: 'docId',
+    serializeAs: 'skills',
+  })
+  public skills: HasMany<typeof Skill>
+
+  @hasMany(() => Certification, {
+    foreignKey: 'docId',
+    serializeAs: 'certifications',
+  })
+  public certifications: HasMany<typeof Certification>
+
+  @hasMany(() => Award, {
+    foreignKey: 'docId',
+    serializeAs: 'awards',
+  })
+  public awards: HasMany<typeof Award>
 }
