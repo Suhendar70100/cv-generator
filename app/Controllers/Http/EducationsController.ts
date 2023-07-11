@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import ShortUniqueId from 'short-unique-id'
 
 export default class EducationsController {
   public async index({ request, view }: HttpContextContract) {
@@ -10,5 +11,16 @@ export default class EducationsController {
   public async create({ request, view }: HttpContextContract) {
     const document = request.document
     return view.render('educations/create', { document })
+  }
+
+  public async store({ request, response }) {
+    const uid = new ShortUniqueId({ length: 10 })()
+    const document = request.document
+    await document.related('educations').create({
+      ...request.body(),
+      id: uid,
+    })
+
+    return response.redirect().toRoute('education', [document.id])
   }
 }
