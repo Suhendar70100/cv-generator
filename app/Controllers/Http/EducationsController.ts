@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import CreateEducationValidator from 'App/Validators/CreateEducationValidator'
 import ShortUniqueId from 'short-unique-id'
 
 export default class EducationsController {
@@ -16,8 +17,9 @@ export default class EducationsController {
   public async store({ request, response }) {
     const uid = new ShortUniqueId({ length: 10 })()
     const document = request.document
+    const payload = await request.validate(CreateEducationValidator)
     await document.related('educations').create({
-      ...request.body(),
+      ...payload,
       id: uid,
     })
 
