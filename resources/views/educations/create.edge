@@ -1,0 +1,69 @@
+{{ inspect(flashMessages.all()) }}
+{{ inspect(session.all()) }}
+
+<form action="{{ route('education.store', [document.id]) }}" method="POST">
+  <input type="text" name="institution" id="" placeholder="Institution">
+  @if(flashMessages.has('errors.institution'))
+  @each(msg in flashMessages.get('errors.institution'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="text" name="field" id="" placeholder="Field">
+  @if(flashMessages.has('errors.field'))
+  @each(msg in flashMessages.get('errors.field'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <select name="type" id="">
+    <option value="" selected disabled>Select Education Type</option>
+    <option value="High School">High School</option>
+    <option value="Associate Degree">Associate Degree</option>
+    <option value="Bachelor Degree">Bachelor Degree</option>
+    <option value="Master Degree">Master Degree</option>
+    <option value="Doctoral Degree">Doctoral Degree</option>
+  </select>
+  @if(flashMessages.has('errors.type'))
+  @each(msg in flashMessages.get('errors.type'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="text" name="gpa" id="" placeholder="GPA">
+  @if(flashMessages.has('errors.gpa'))
+  @each(msg in flashMessages.get('errors.gpa'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="date" name="startDate" id="startDate" placeholder="Start Date">
+  @if(flashMessages.has('errors.startDate'))
+  @each(msg in flashMessages.get('errors.startDate'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="date" name="endDate" id="endDate" placeholder="End Date">
+  @if(flashMessages.has('errors.endDate'))
+  @each(msg in flashMessages.get('errors.endDate'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="checkbox" name="isActive" id="" value="1">
+  @if(flashMessages.has('errors.isActive'))
+  @each(msg in flashMessages.get('errors.isActive'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <textarea name="description" id="" cols="30" rows="10"></textarea>
+  @if(flashMessages.has('errors.description'))
+  @each(msg in flashMessages.get('errors.description'))
+  <p class="text-error" style="color: red; margin: 0;">{{ sentenceCase(msg) }}</p>
+  @end
+  @endif
+  <br>
+  <input type="submit" value="Create">
+</form>
