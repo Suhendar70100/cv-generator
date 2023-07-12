@@ -36,4 +36,22 @@ export default class EducationsController {
 
     return view.render('educations/edit', { document, education })
   }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const document = request.document
+    const payload = await request.validate(CreateEducationValidator)
+    const education = await Education.query()
+      .where('id', params.eduId)
+      .where('docId', document.id)
+      .firstOrFail()
+
+    await education
+      .merge({
+        ...payload,
+        isActive: request.input('isActive') ? true : false,
+      })
+      .save()
+
+    return response.redirect().toRoute('education.show', [document.id, education.id])
+  }
 }
