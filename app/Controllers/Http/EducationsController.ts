@@ -54,4 +54,15 @@ export default class EducationsController {
 
     return response.redirect().toRoute('education.show', [document.id, education.id])
   }
+
+  public async destroy({ params, request, response }: HttpContextContract) {
+    const document = request.document
+    const education = await Education.query()
+      .where('id', params.eduId)
+      .where('docId', document.id)
+      .firstOrFail()
+
+    await education.delete()
+    return response.redirect().toRoute('education', [document.id])
+  }
 }
